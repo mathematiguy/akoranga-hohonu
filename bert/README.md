@@ -1,2 +1,3 @@
-# minimal-project
-A simple template for future projects
+# DeepSpeech
+
+My own implementation of DeepSpeech
