@@ -1,0 +1,26 @@
+schema: '2.0'
+stages:
+  librespeech@dev-clean:
+    cmd: "wget https://www.openslr.org/resources/12/dev-clean.tar.gz -P data\ntar\
+      \ -xvf data/dev-clean.tar.gz -C data\nrm data/dev-clean.tar.gz\n"
+    outs:
+    - path: data/LibriSpeech/dev-clean
+      md5: a9a90d991a873f59a995ea7f77e54a40.dir
+      size: 359369807
+      nfiles: 2800
+  librespeech@test-clean:
+    cmd: "wget https://www.openslr.org/resources/12/test-clean.tar.gz -P data\ntar\
+      \ -xvf data/test-clean.tar.gz -C data\nrm data/test-clean.tar.gz\n"
+    outs:
+    - path: data/LibriSpeech/test-clean
+      md5: 273b92ad24d8391e02be36bf81274112.dir
+      size: 367511195
+      nfiles: 2707
+  librespeech@train-clean-100:
+    cmd: "wget https://www.openslr.org/resources/12/train-clean-100.tar.gz -P data\n\
+      tar -xvf data/train-clean-100.tar.gz -C data\nrm data/train-clean-100.tar.gz\n"
+    outs:
+    - path: data/LibriSpeech/train-clean-100
+      md5: 9931d25aad46c5545ae622d1f0081a2b.dir
+      size: 6617556511
+      nfiles: 29124
