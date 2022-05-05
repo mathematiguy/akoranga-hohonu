@@ -23,22 +23,25 @@ ENV HOME /home/kaimahi
 
 # Install apt packages
 RUN apt update
-RUN apt install -y awscli curl software-properties-common
+RUN apt install -y awscli curl software-properties-common ffmpeg
 RUN add-apt-repository ppa:deadsnakes/ppa
 
 # Install python
 ENV PYTHON_VERSION 3.9
+ENV PYTHON python${PYTHON_VERSION}
+ENV PIP ${PYTHON} -m pip
 RUN apt update
-RUN apt install -y python${PYTHON_VERSION}-dev python${PYTHON_VERSION}-distutils
-RUN rm /usr/bin/python3 && ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python3
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python${PYTHON_VERSION}
+RUN apt install -y ${PYTHON}-dev ${PYTHON}-distutils
+RUN rm /usr/bin/python3 && ln -s /usr/bin/${PYTHON} /usr/bin/python3
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | ${PYTHON}
 
-RUN pip3 install --upgrade pip
+# Install pip packages
+RUN ${PIP} install --upgrade pip
 COPY requirements.txt /root/requirements.txt
-RUN pip3 install -r /root/requirements.txt
+RUN ${PIP} install -r /root/requirements.txt
 
 # Install local package
 COPY deepspeech /code/deepspeech
 COPY setup.py /code
-RUN python${PYTHON_VERSION} -m pip install -e /code
+RUN ${PYTHON} -m pip install -e /code
 ENV PYTHONPATH="/code:${PYTHONPATH}"
