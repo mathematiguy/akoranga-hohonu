@@ -1,3 +1,3 @@
-# DeepSpeech
+# Bert
 
-My own implementation of DeepSpeech
+My own implementation of Bert
